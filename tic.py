@@ -18,3 +18,17 @@ def display_board(board):
 
 board = ['0', 'x', 'x', 'x', 'o', 'o', 'o', 'x', 'x', 'x']
 display_board(board)
+
+'''
+   |   |
+ x | x | x
+   |   |
+------------
+   |   |
+ o | o | o
+   |   |
+------------
+   |   |
+ x | x | x
+   |   |
+'''
