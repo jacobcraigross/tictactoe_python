@@ -7,11 +7,11 @@ def display_board(board):
     print('   |   |')
     print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9])
     print('   |   |')
-    print('------------')
+    print('-----------')
     print('   |   |')
     print(' ' + board[4] + ' | ' + board[5] + ' | ' + board[6])
     print('   |   |')
-    print('------------')
+    print('-----------')
     print('   |   |')
     print(' ' + board[1] + ' | ' + board[2] + ' | ' + board[3])
     print('   |   |')
@@ -39,14 +39,14 @@ def place_marker(board, marker, position):
     board[position] = marker
 
 def win_check(board, mark):
-    return ((board[7] == mark and board[8] == and board[9] === mark) or
-            (board[4] == mark and board[5] == and board[6] === mark) or
-            (board[1] == mark and board[2] == and board[3] === mark) or
-            (board[7] == mark and board[4] == and board[1] === mark) or
-            (board[8] == mark and board[5] == and board[2] === mark) or
-            (board[9] == mark and board[6] == and board[3] === mark) or
-            (board[7] == mark and board[5] == and board[3] === mark) or
-            (board[9] == mark and board[5] == and board[1] === mark))
+    return ((board[7] == mark and board[8] == mark and board[9] == mark) or
+            (board[4] == mark and board[5] == mark and board[6] == mark) or
+            (board[1] == mark and board[2] == mark and board[3] == mark) or
+            (board[7] == mark and board[4] == mark and board[1] == mark) or
+            (board[8] == mark and board[5] == mark and board[2] == mark) or
+            (board[9] == mark and board[6] == mark and board[3] == mark) or
+            (board[7] == mark and board[5] == mark and board[3] == mark) or
+            (board[9] == mark and board[5] == mark and board[1] == mark))
 
 import random
 def choose_first():
@@ -77,8 +77,55 @@ def replay():
 
     return raw_input('do you want to play again? enter yes or no').lower().startswith('y')
 
+print ('~ ~ ~ welcome to tic tac toe ~ ~ ~')
 
-'''
-end third update. the code below this comment coming tomorrow will be the
-fourth update and will control the actual gameplay.
-'''
+while True:
+
+    theBoard = [''] * 10
+    player1_marker, player2_marker = player_input()
+    turn = choose_first()
+    print(turn + 'will go first')
+
+    game_on = True
+
+    while game_on:
+
+        if turn == 'player 1':
+
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            place_marker(theBoard, player1_marker, position)
+
+            if win_check(theBoard, player1_marker):
+                display_board(theBoard)
+                print('congrats player 1 has won')
+                game_on = False
+
+            else:
+                if full_board_check(theBoard):
+                    display_board(theBoard)
+                    print('the game is a draw')
+                    break
+                else:
+                    turn = 'player 2'
+
+        else:
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            place_marker(theBoard, player2_marker, position)
+
+            if win_check(theBoard, player2_marker):
+                display_board(theBoard)
+                print('congrats player 2 won')
+                game_on = False
+
+            else:
+                if full_board_check(theBoard):
+                    display_board(theBoard)
+                    print('the game is a draw')
+                    break
+                else:
+                    turn = 'player 1'
+
+    if not replay():
+        break
